@@ -4,21 +4,6 @@ using System.Linq;
 
 namespace JurassicPark
 {
-    class Dinosaur
-    {
-        public string Name { get; set; }
-        public string DietType { get; set; }
-        public DateTime WhenAcquired { get; set; }
-        public double Weight { get; set; }
-        public int EnclosureNumber { get; set; }
-
-        public void Description()
-        {
-            Console.WriteLine($"{Name}: {DietType}, {Weight} pounds, enclosure #{EnclosureNumber}. Acquired on {WhenAcquired}");
-        }
-
-    }
-
     class Program
     {
         static void Main(string[] args)
@@ -45,7 +30,8 @@ namespace JurassicPark
                         }
                         else
                         {
-                            foreach (Dinosaur dinosaur in dinosaurs)
+                            var dinosaursSorted = dinosaurs.OrderBy(dinosaur => dinosaur.WhenAcquired);
+                            foreach (Dinosaur dinosaur in dinosaursSorted)
                             {
                                 dinosaur.Description();
                             }
@@ -109,6 +95,10 @@ namespace JurassicPark
                         int numHerbivores = dinosaurs.Count(dinosaur => dinosaur.DietType == "herbivore");
 
                         Console.WriteLine($"There are {numCarnivores} carnivore(s) and {numHerbivores} herbivore(s).");
+                        break;
+
+                    default:
+                        Console.WriteLine("Only enter the provided options spelled correctly.");
                         break;
                 }
             }
